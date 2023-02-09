@@ -10,6 +10,7 @@ class Requirements implements \JsonSerializable {
 	private ?string $requirements_priority = null;
 	private ?string $requirements_description = null;
 	private ?int $idstates = null;
+	private ?string $requirements_date = null;
 
 	public function __construct() {
 
@@ -44,6 +45,10 @@ class Requirements implements \JsonSerializable {
 
 		$requirements->setIdstates(
 			isset(request->idstates) ? request->idstates : null
+		);
+
+		$requirements->setRequirementsDate(
+			isset(request->requirements_date) ? request->requirements_date : null
 		);
 
 		return $requirements;
@@ -100,6 +105,15 @@ class Requirements implements \JsonSerializable {
 
 	public function setIdstates(?int $idstates): Requirements {
 		$this->idstates = $idstates;
+		return $this;
+	}
+
+	public function getRequirementsDate(): ?string {
+		return $this->requirements_date;
+	}
+
+	public function setRequirementsDate(?string $requirements_date): Requirements {
+		$this->requirements_date = $requirements_date;
 		return $this;
 	}
 
