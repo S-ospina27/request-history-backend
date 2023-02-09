@@ -21,4 +21,15 @@ class CompaniesModel {
 		])->execute();
 	}
 
+	public function updateCompaniesDB(Companies $companies) {
+		return DB::call("update_companies",[
+			$companies->getIdcompanies(),
+			$companies->getIdstates(),
+			$companies->getCompaniesNit(),
+			$companies->getCompaniesBusinessName(),
+			$companies->getCompaniesEmail(),
+			$companies->getCompaniesUsername()
+		])->execute();
+
+	}
 }

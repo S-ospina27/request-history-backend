@@ -16,7 +16,7 @@ class CompaniesController
 	}
 
 	public function createCompanies() {
-	$responseCreate=$this->companiesModel->createCompaniesDB(
+		$responseCreate=$this->companiesModel->createCompaniesDB(
 			Companies::formFields()->setIdstates(4)
 		);
 		if ($responseCreate->status === 'database-error') {
@@ -24,5 +24,14 @@ class CompaniesController
 		}
 
 		return response->success('Empresa creado correctamente');
+	}
+
+	public function updateCompanies() {
+		$responseUpdate=$this->companiesModel->updateCompaniesDB(companies::formFields());
+		if ($responseUpdate->status === 'database-error') {
+			return response->error('Ha ocurrido un error al actualizar la empresa');
+		}
+
+		return response->success('Empresa actualizada correctamente');
 	}
 }

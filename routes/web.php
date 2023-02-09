@@ -14,4 +14,5 @@ use App\Http\Controllers\CompaniesController;
 
 
 Route::any('create', [CompaniesController::class, 'createCompanies']);
+Route::any('update', [CompaniesController::class, 'updateCompanies']);
 // Route::post("create",[CompaniesController::class,"createCompanies"]);
