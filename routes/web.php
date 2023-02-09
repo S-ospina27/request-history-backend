@@ -4,6 +4,7 @@ use LionRoute\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\CompaniesController;
 use App\Http\Controllers\DevelopersController;
+use App\Http\Controllers\RequirementsController;
 
 /**
  * ------------------------------------------------------------------------------
@@ -14,12 +15,21 @@ use App\Http\Controllers\DevelopersController;
  **/
 
 Route::prefix("companies", function(){
-Route::post('create', [CompaniesController::class, 'createCompanies']);
-Route::post('update', [CompaniesController::class, 'updateCompanies']);
+    Route::post('create', [CompaniesController::class, 'createCompanies']);
+    Route::post('update', [CompaniesController::class, 'updateCompanies']);
+
+    Route::prefix("requirements", function(){
+        Route::post('create', [RequirementsController::class, 'createRequirements']);
+        // Route::post('update', [RequirementsController::class, 'updateDevelopers']);
+    });
+
 });
 
 Route::prefix("developers", function(){
-Route::post('create', [DevelopersController::class, 'createDevelopers']);
-Route::post('update', [DevelopersController::class, 'updateDevelopers']);
+    Route::post('create', [DevelopersController::class, 'createDevelopers']);
+    Route::post('update', [DevelopersController::class, 'updateDevelopers']);
 });
+
+
+
 

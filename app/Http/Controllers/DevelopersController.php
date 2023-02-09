@@ -35,11 +35,6 @@ class DevelopersController {
 		return response->success('Desarrollador actualizado correctamente');
 	}
 
-
-
-
-
-
 }
 
 
