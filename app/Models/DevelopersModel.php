@@ -16,8 +16,15 @@ class DevelopersModel {
 			$developers->getDeveloperscolType(),
 			$developers->getIdstates()
 		])->execute();
+	}
 
-
+	public function updateDevelopersDB(Developers $developers) {
+		return DB::call("update_developers",[
+			$developers->getDevelopersName(),
+			$developers->getDeveloperscolType(),
+			$developers->getIdstates(),
+			$developers->getIddevelopers()
+		])->execute();
 	}
 
 }

@@ -20,6 +20,6 @@ Route::post('update', [CompaniesController::class, 'updateCompanies']);
 
 Route::prefix("developers", function(){
 Route::post('create', [DevelopersController::class, 'createDevelopers']);
-Route::post('update', [DevelopersController::class, 'updateCompanies']);
+Route::post('update', [DevelopersController::class, 'updateDevelopers']);
 });
 

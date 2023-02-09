@@ -24,6 +24,16 @@ class DevelopersController {
 		return response->success('Desarrollador creado correctamente');
 	}
 
+	public function updateDevelopers(){
+
+		$responseUpdate=$this->developersModel->updateDevelopersDB(Developers::formFields());
+
+		if ($responseUpdate->status === 'database-error') {
+			return response->error('Ha ocurrido un error al actualizar el desarrollador');
+		}
+
+		return response->success('Desarrollador actualizado correctamente');
+	}
 
 
 
