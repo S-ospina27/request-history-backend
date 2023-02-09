@@ -2,7 +2,7 @@
 
 use LionRoute\Route;
 use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\HomeController;
+use App\Http\Controllers\CompaniesController;
 
 /**
  * ------------------------------------------------------------------------------
@@ -12,10 +12,6 @@ use App\Http\Controllers\HomeController;
  * ------------------------------------------------------------------------------
  **/
 
-Route::any('/', [HomeController::class, 'index']);
 
-Route::prefix('api', function() {
-    Route::prefix('auth', function() {
-        Route::post('login', [LoginController::class, 'auth']);
-    });
-});
+Route::any('create', [CompaniesController::class, 'createCompanies']);
+// Route::post("create",[CompaniesController::class,"createCompanies"]);
