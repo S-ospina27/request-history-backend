@@ -25,6 +25,11 @@ Route::prefix("companies", function(){
 
 });
 
+Route::prefix("assignment", function(){
+    Route::post('create', [DevelopersController::class, 'create_assignment']);
+    Route::post('update', [DevelopersController::class, 'update_assignment']);
+});
+
 Route::prefix("developers", function(){
     Route::post('create', [DevelopersController::class, 'createDevelopers']);
     Route::post('update', [DevelopersController::class, 'updateDevelopers']);

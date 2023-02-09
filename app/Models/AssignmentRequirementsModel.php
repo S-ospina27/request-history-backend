@@ -3,11 +3,22 @@
 namespace App\Models;
 
 use LionSQL\Drivers\MySQL as DB;
-
+use Database\Class\AssignmentRequirements;
 class AssignmentRequirementsModel {
 
 	public function __construct() {
 		
+	}
+
+	public function create_assignment_requirementsDB(AssignmentRequirements $assignmentRequirements){
+
+		return DB::call("create_assignment_requirements",[
+			$assignmentRequirements->getIdrequirements(),
+			$assignmentRequirements->getIdstates(),
+			$assignmentRequirements->getAssignmentRequirementsDate(),
+			$assignmentRequirements->getAssignmentRequirementsDeadline()
+		])->execute();
+
 	}
 
 }
