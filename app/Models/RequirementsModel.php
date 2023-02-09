@@ -22,6 +22,17 @@ class RequirementsModel {
 
 	}
 
+	public function updateRequirementsDB(Requirements $requirements){
+
+		return DB::call("update_requirements",[
+			$requirements->getRequirementsName(),
+			$requirements->getRequirementsPriority(),
+			$requirements->getRequirementsDescription(),
+			$requirements->getIdstates(),
+			$requirements->getIdrequirements()
+		])->execute();
+	}
+
 
 
 }

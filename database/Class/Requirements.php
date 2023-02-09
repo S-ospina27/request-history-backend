@@ -44,7 +44,7 @@ class Requirements implements \JsonSerializable {
 		);
 
 		$requirements->setIdstates(
-			isset(request->idstates) ? request->idstates : null
+			isset(request->idstates) ? (int) request->idstates : null
 		);
 
 		$requirements->setRequirementsDate(

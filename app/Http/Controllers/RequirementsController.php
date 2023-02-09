@@ -17,15 +17,27 @@ class RequirementsController {
 
 		$responseCreate =$this->requirementsModel->createRequirementsDB(
 			Requirements::formFields()
-				->setRequirementsDate(Carbon::now()->format('Y-m-d'))
-				->setIdstates(1)
-			);
+			->setRequirementsDate(Carbon::now()->format('Y-m-d'))
+			->setIdstates(1)
+		);
 
 		if ($responseCreate->status === 'database-error') {
 			return response->error('Ha ocurrido un error al crear el requerimiento');
 		}
 
 		return response->success('Requerimiento creado correctamente');
+	}
+
+	public function updateRequirements(){
+
+		$responseUpdate= $this->requirementsModel->updateRequirementsDB(Requirements::formFields());
+
+		if ($responseUpdate->status === 'database-error') {
+			return response->error('Ha ocurrido un error al actualizar el requerimiento');
+		}
+
+		return response->success('Requerimiento actualizado correctamente');
+
 	}
 
 

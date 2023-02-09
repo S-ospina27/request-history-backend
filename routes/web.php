@@ -20,7 +20,7 @@ Route::prefix("companies", function(){
 
     Route::prefix("requirements", function(){
         Route::post('create', [RequirementsController::class, 'createRequirements']);
-        // Route::post('update', [RequirementsController::class, 'updateDevelopers']);
+        Route::post('update', [RequirementsController::class, 'updateRequirements']);
     });
 
 });
