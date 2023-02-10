@@ -33,6 +33,13 @@ class RequirementsModel {
 		])->execute();
 	}
 
+		public function verifyRequirementsExistenceDB(Requirements $requirements){
+		return DB::table('requirements')
+            ->select(DB::as(DB::count('*'), 'cont'))
+            ->where(DB::equalTo('idstates'), 1)
+            ->and(DB::equalTo('idcompanies'), $requirements->getIdcompanies())
+            ->get();
+	}
 
 
 }

@@ -45,11 +45,5 @@ class CompaniesController
 		return response->success('Empresa actualizada correctamente');
 	}
 
-	public function verifyCompanyExistence(){
-		$verifyCompanyExistence = $this->companiesModel->verifyCompanyExistenceDB(companies::formFields());
-		if ($verifyCompanyExistence->cont === 1) {
-			return response->success("ya se encuentra registrado con nosotros");
-		}
-		return response->error("usted todavia no cuenta con un registro con nosotros");
-	}
+
 }

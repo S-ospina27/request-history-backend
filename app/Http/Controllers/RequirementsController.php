@@ -13,19 +13,33 @@ class RequirementsController {
 
 	}
 
-	public function createRequirements(){
-
-		$responseCreate =$this->requirementsModel->createRequirementsDB(
+	public function createRequirements() {
+		$verifyRequirementsExistence = $this->requirementsModel->verifyRequirementsExistenceDB(
 			Requirements::formFields()
-			->setRequirementsDate(Carbon::now()->format('Y-m-d'))
-			->setIdstates(1)
 		);
 
-		if ($responseCreate->status === 'database-error') {
-			return response->error('Ha ocurrido un error al crear el requerimiento');
+		if ($verifyRequirementsExistence->cont === 0) {
+			$responseCreate =$this->requirementsModel->createRequirementsDB(
+				Requirements::formFields()
+				->setRequirementsDate(Carbon::now()->format('Y-m-d'))
+				->setIdstates(1)
+			);
+
+			if ($responseCreate->status === 'database-error') {
+				return response->error('Ha ocurrido un error al crear el requerimiento');
+			}
+
+			return response->success('Requerimiento creado correctamente');
+
+		}else{
+
+			return response->info("No puedes agregar mas requerimientos
+			 	hasta que todos los que ya tienes agregados sean aceptados"
+			 );
 		}
 
-		return response->success('Requerimiento creado correctamente');
+
+
 	}
 
 	public function updateRequirements(){
