@@ -23,7 +23,7 @@ class AssignmentRequirements implements \JsonSerializable {
 		$assignmentrequirements = new AssignmentRequirements();
 
 		$assignmentrequirements->setIdassignmentRequirements(
-			isset(request->idassignment_requirements) ? request->idassignment_requirements : null
+			isset(request->idassignment_requirements) ? (int) request->idassignment_requirements : null
 		);
 
 		$assignmentrequirements->setIdrequirements(
@@ -31,7 +31,7 @@ class AssignmentRequirements implements \JsonSerializable {
 		);
 
 		$assignmentrequirements->setIdstates(
-			isset(request->idstates) ? request->idstates : null
+			isset(request->idstates) ? (int) request->idstates : null
 		);
 
 		$assignmentrequirements->setAssignmentRequirementsDate(

@@ -18,10 +18,19 @@ class AssignmentRequirementsController {
 
 		$this->assignmentRequirementsModel->create_assignment_requirementsDB(
 			AssignmentRequirements::formFields()
-				->setIdstates(6)
-				->setAssignmentRequirementsDate(Carbon::now()->format('Y-m-d'))
+			->setIdstates(6)
+			->setAssignmentRequirementsDate(Carbon::now()->format('Y-m-d'))
 		);
-
 	}
 
+	public function  update_assignment_requirements() {
+		$responseUpdate=$this->assignmentRequirementsModel->update_assignment_requirementsDB(
+			AssignmentRequirements::formFields()
+		);
+		if ($responseUpdate->status === 'database-error') {
+			return response->error('Ha ocurrido un error al actualizar la  asignación');
+		}
+
+		return response->success('Asignación  actualizada correctamente');
+	}
 }

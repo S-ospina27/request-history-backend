@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AssignmentRequirementsController;
 use LionRoute\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\CompaniesController;
@@ -26,8 +27,8 @@ Route::prefix("companies", function(){
 });
 
 Route::prefix("assignment", function(){
-    Route::post('create', [DevelopersController::class, 'create_assignment']);
-    Route::post('update', [DevelopersController::class, 'update_assignment']);
+    Route::post('create', [AssignmentRequirementsController::class, 'create_assignment_requirements']);
+    Route::post('update', [AssignmentRequirementsController::class, 'update_assignment_requirements']);
 });
 
 Route::prefix("developers", function(){

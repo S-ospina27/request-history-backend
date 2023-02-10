@@ -27,7 +27,7 @@ class AssignmentRequirementsModel {
 			$assignmentRequirements->getIdstates(),
 			$assignmentRequirements->getAssignmentRequirementsDeadline(),
 			$assignmentRequirements->getAssignmentRequirementsFinishDate(),
-			$assignmentRequirements->getIdrequirements()
+			$assignmentRequirements->getIdassignmentRequirements()
 		])->execute();
 
 	}
