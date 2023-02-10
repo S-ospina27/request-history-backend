@@ -32,4 +32,12 @@ class CompaniesModel {
 		])->execute();
 
 	}
+
+	public function verifyCompanyExistence(Companies $companies){
+		return DB::table('companies')
+            ->select(DB::as(DB::count('*'), 'cont'))
+            ->where(DB::equalTo('companies_nit'), $companies->getCompaniesNit())
+            ->and(DB::equalTo('companies_email'), $companies->getCompaniesEmail())
+            ->get();
+	}
 }
