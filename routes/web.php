@@ -18,6 +18,8 @@ use App\Http\Controllers\RequirementsController;
 Route::prefix("companies", function(){
     Route::post('create', [CompaniesController::class, 'createCompanies']);
     Route::post('update', [CompaniesController::class, 'updateCompanies']);
+    // Route::post('verify', [CompaniesController::class, 'verifyCompanyExistence']);
+
 
     Route::prefix("requirements", function(){
         Route::post('create', [RequirementsController::class, 'createRequirements']);

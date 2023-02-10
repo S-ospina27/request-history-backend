@@ -33,7 +33,7 @@ class CompaniesModel {
 
 	}
 
-	public function verifyCompanyExistence(Companies $companies){
+	public function verifyCompanyExistenceDB(Companies $companies){
 		return DB::table('companies')
             ->select(DB::as(DB::count('*'), 'cont'))
             ->where(DB::equalTo('companies_nit'), $companies->getCompaniesNit())
