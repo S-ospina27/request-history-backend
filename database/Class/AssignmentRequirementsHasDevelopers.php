@@ -4,9 +4,12 @@ namespace Database\Class;
 
 class AssignmentRequirementsHasDevelopers implements \JsonSerializable {
 
+	private ?int $idassignment_requirements_has_developers = null;
 	private ?int $idassignment_requirements = null;
 	private ?int $iddevelopers = null;
 	private ?string $assignment_requirements_has_developers_date = null;
+	private ?string $assignment_requirements_has_developers_finish_date = null;
+	private ?int $idstates = null;
 
 	public function __construct() {
 
@@ -18,6 +21,10 @@ class AssignmentRequirementsHasDevelopers implements \JsonSerializable {
 
 	public static function formFields(): AssignmentRequirementsHasDevelopers {
 		$assignmentrequirementshasdevelopers = new AssignmentRequirementsHasDevelopers();
+
+		$assignmentrequirementshasdevelopers->setIdassignmentRequirementsHasDevelopers(
+			isset(request->idassignment_requirements_has_developers) ? request->idassignment_requirements_has_developers : null
+		);
 
 		$assignmentrequirementshasdevelopers->setIdassignmentRequirements(
 			isset(request->idassignment_requirements) ? request->idassignment_requirements : null
@@ -31,7 +38,24 @@ class AssignmentRequirementsHasDevelopers implements \JsonSerializable {
 			isset(request->assignment_requirements_has_developers_date) ? request->assignment_requirements_has_developers_date : null
 		);
 
+		$assignmentrequirementshasdevelopers->setAssignmentRequirementsHasDevelopersFinishDate(
+			isset(request->assignment_requirements_has_developers_finish_date) ? request->assignment_requirements_has_developers_finish_date : null
+		);
+
+		$assignmentrequirementshasdevelopers->setIdstates(
+			isset(request->idstates) ? request->idstates : null
+		);
+
 		return $assignmentrequirementshasdevelopers;
+	}
+
+	public function getIdassignmentRequirementsHasDevelopers(): ?int {
+		return $this->idassignment_requirements_has_developers;
+	}
+
+	public function setIdassignmentRequirementsHasDevelopers(?int $idassignment_requirements_has_developers): AssignmentRequirementsHasDevelopers {
+		$this->idassignment_requirements_has_developers = $idassignment_requirements_has_developers;
+		return $this;
 	}
 
 	public function getIdassignmentRequirements(): ?int {
@@ -58,6 +82,24 @@ class AssignmentRequirementsHasDevelopers implements \JsonSerializable {
 
 	public function setAssignmentRequirementsHasDevelopersDate(?string $assignment_requirements_has_developers_date): AssignmentRequirementsHasDevelopers {
 		$this->assignment_requirements_has_developers_date = $assignment_requirements_has_developers_date;
+		return $this;
+	}
+
+	public function getAssignmentRequirementsHasDevelopersFinishDate(): ?string {
+		return $this->assignment_requirements_has_developers_finish_date;
+	}
+
+	public function setAssignmentRequirementsHasDevelopersFinishDate(?string $assignment_requirements_has_developers_finish_date): AssignmentRequirementsHasDevelopers {
+		$this->assignment_requirements_has_developers_finish_date = $assignment_requirements_has_developers_finish_date;
+		return $this;
+	}
+
+	public function getIdstates(): ?int {
+		return $this->idstates;
+	}
+
+	public function setIdstates(?int $idstates): AssignmentRequirementsHasDevelopers {
+		$this->idstates = $idstates;
 		return $this;
 	}
 

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AssignmentRequirementsController;
+use App\Http\Controllers\AssignmentRequirementsHasDevelopersController;
 use LionRoute\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\CompaniesController;
@@ -18,8 +19,6 @@ use App\Http\Controllers\RequirementsController;
 Route::prefix("companies", function(){
     Route::post('create', [CompaniesController::class, 'createCompanies']);
     Route::post('update', [CompaniesController::class, 'updateCompanies']);
-    // Route::post('verify', [CompaniesController::class, 'verifyCompanyExistence']);
-
 
     Route::prefix("requirements", function(){
         Route::post('create', [RequirementsController::class, 'createRequirements']);
@@ -31,6 +30,16 @@ Route::prefix("companies", function(){
 Route::prefix("assignment", function(){
     Route::post('create', [AssignmentRequirementsController::class, 'create_assignment_requirements']);
     Route::post('update', [AssignmentRequirementsController::class, 'update_assignment_requirements']);
+
+    Route::prefix("developers", function(){
+        Route::post('create', [AssignmentRequirementsHasDevelopersController::class, 'createAssignmentRequirementsHasDevelopers']
+        );
+         Route::post('delete', [AssignmentRequirementsHasDevelopersController::class, 'deletesignmentRequirementsHasDevelopers']
+       );
+         Route::post('update', [AssignmentRequirementsHasDevelopersController::class, 'updatessignmentRequirementsHasDevelopers']
+       );
+    });
+
 });
 
 Route::prefix("developers", function(){
