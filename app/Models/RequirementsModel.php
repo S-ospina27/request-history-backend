@@ -42,7 +42,7 @@ class RequirementsModel {
 	}
 
 	public function readRequirementsByClientsDB(Requirements $requirements){
-		return DB::view("read_requirements")
+		return DB::view("read_requirements_clients")
 		->select()
 		->where(DB::equalTo('idcompanies'), $requirements->getIdcompanies())
 		->getAll();
@@ -67,6 +67,22 @@ class RequirementsModel {
 		->select(DB::as(DB::count('*'),'terminado'))
 		->where(DB::equalTo('idstates'),7)
 		->get();
+	}
+
+	public function readRequirementsAdminDB(){
+		return DB::view("read_requirements_admin")
+		->select()
+		->getAll();
+	}
+
+	public function requirementsSelectorDB() {
+		return DB::table("requirements")
+		->select(
+			DB::column("idrequirements"),
+			DB::column("requirements_name")
+			)
+		->where(DB::equalTo("idstates"),3)
+		->getAll();
 	}
 
 }

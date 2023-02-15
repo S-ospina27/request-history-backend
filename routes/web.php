@@ -27,6 +27,8 @@ Route::prefix("companies", function(){
         Route::get('pending', [RequirementsController::class, 'pendingRequirements']);
         Route::get('accepted', [RequirementsController::class, 'acceptedRequirements']);
         Route::get('finished', [RequirementsController::class, 'finishedRequirements']);
+        Route::get('requirementsByadmin', [RequirementsController::class, 'readRequirementsAdmin']);
+        Route::get('requirementselector', [RequirementsController::class, 'requirementsSelector']);
     });
 
 });

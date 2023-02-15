@@ -68,4 +68,14 @@ class RequirementsController {
 		return $this->requirementsModel->finishedRequirementsDB();
 	}
 
+	public function readRequirementsAdmin() {
+
+		return $this->requirementsModel->readRequirementsAdminDB();
+	}
+
+	public function requirementsSelector(){
+
+		return $this->requirementsModel->requirementsSelectorDB();
+	}
+
 }
