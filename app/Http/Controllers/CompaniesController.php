@@ -24,13 +24,13 @@ class CompaniesController
 			);
 
 			if ($responseCreate->status === 'database-error') {
-				return response->error('Ha ocurrido un error al crear la empresa');
+				return response->error('Ha ocurrido un error al ingresar la empresa');
 			}
 
 			return response->success('Empresa creado correctamente');
 
 		}else{
-			return response->info("ya se encuentra registrado con nosotros");
+			return response->info("Ingreso exitoso ");
 		}
 
 

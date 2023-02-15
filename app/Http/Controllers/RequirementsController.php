@@ -33,17 +33,12 @@ class RequirementsController {
 
 		}else{
 
-			return response->info("No puedes agregar mas requerimientos
-			 	hasta que todos los que ya tienes agregados sean aceptados"
-			 );
+			return response->info("tienees requerimientos pendientes no puedes agregar mas"
+		);
 		}
-
-
-
 	}
 
 	public function updateRequirements(){
-
 		$responseUpdate= $this->requirementsModel->updateRequirementsDB(Requirements::formFields());
 
 		if ($responseUpdate->status === 'database-error') {
@@ -51,8 +46,26 @@ class RequirementsController {
 		}
 
 		return response->success('Requerimiento actualizado correctamente');
-
 	}
 
+
+	public function readRequirementsByClients(){
+		return $this->requirementsModel->readRequirementsByClientsDB(Requirements::formFields());
+	}
+
+	public function pendingRequirements(){
+
+		return $this->requirementsModel->pendingRequirementsDB();
+	}
+
+	public function acceptedRequirements() {
+
+		return $this->requirementsModel->acceptedRequirementsDB();
+	}
+
+	public function finishedRequirements() {
+
+		return $this->requirementsModel->finishedRequirementsDB();
+	}
 
 }

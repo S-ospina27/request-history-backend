@@ -23,6 +23,10 @@ Route::prefix("companies", function(){
     Route::prefix("requirements", function(){
         Route::post('create', [RequirementsController::class, 'createRequirements']);
         Route::post('update', [RequirementsController::class, 'updateRequirements']);
+        Route::post('requirementsByclients', [RequirementsController::class, 'readRequirementsByClients']);
+        Route::get('pending', [RequirementsController::class, 'pendingRequirements']);
+        Route::get('accepted', [RequirementsController::class, 'acceptedRequirements']);
+        Route::get('finished', [RequirementsController::class, 'finishedRequirements']);
     });
 
 });

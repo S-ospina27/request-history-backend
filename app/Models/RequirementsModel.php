@@ -33,13 +33,40 @@ class RequirementsModel {
 		])->execute();
 	}
 
-		public function verifyRequirementsExistenceDB(Requirements $requirements){
+	public function verifyRequirementsExistenceDB(Requirements $requirements){
 		return DB::table('requirements')
-            ->select(DB::as(DB::count('*'), 'cont'))
-            ->where(DB::equalTo('idstates'), 1)
-            ->and(DB::equalTo('idcompanies'), $requirements->getIdcompanies())
-            ->get();
+		->select(DB::as(DB::count('*'), 'cont'))
+		->where(DB::equalTo('idstates'), 3)
+		->and(DB::equalTo('idcompanies'), $requirements->getIdcompanies())
+		->get();
 	}
 
+	public function readRequirementsByClientsDB(Requirements $requirements){
+		return DB::view("read_requirements")
+		->select()
+		->where(DB::equalTo('idcompanies'), $requirements->getIdcompanies())
+		->getAll();
+	}
+
+	public function pendingRequirementsDB(){
+		return DB::table("requirements")
+		->select(DB::as(DB::count('*'),'pendientes'))
+		->where(DB::equalTo('idstates'),1)
+		->get();
+	}
+
+	public function acceptedRequirementsDB(){
+		return DB::table("requirements")
+		->select(DB::as(DB::count('*'),'aceptado'))
+		->where(DB::equalTo('idstates'),3)
+		->get();
+	}
+
+	public function finishedRequirementsDB(){
+		return DB::table("requirements")
+		->select(DB::as(DB::count('*'),'terminado'))
+		->where(DB::equalTo('idstates'),7)
+		->get();
+	}
 
 }
