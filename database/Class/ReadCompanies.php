@@ -2,7 +2,7 @@
 
 namespace Database\Class;
 
-class Companies implements \JsonSerializable {
+class ReadCompanies implements \JsonSerializable {
 
 	private ?int $idcompanies = null;
 	private ?int $idroles = null;
@@ -20,45 +20,45 @@ class Companies implements \JsonSerializable {
 		return get_object_vars($this);
 	}
 
-	public static function formFields(): Companies {
-		$companies = new Companies();
+	public static function formFields(): ReadCompanies {
+		$readcompanies = new ReadCompanies();
 
-		$companies->setIdcompanies(
+		$readcompanies->setIdcompanies(
 			isset(request->idcompanies) ? request->idcompanies : null
 		);
 
-		$companies->setIdroles(
+		$readcompanies->setIdroles(
 			isset(request->idroles) ? request->idroles : null
 		);
 
-		$companies->setIdstates(
+		$readcompanies->setIdstates(
 			isset(request->idstates) ? request->idstates : null
 		);
 
-		$companies->setCompaniesNit(
+		$readcompanies->setCompaniesNit(
 			isset(request->companies_nit) ? request->companies_nit : null
 		);
 
-		$companies->setCompaniesBusinessName(
+		$readcompanies->setCompaniesBusinessName(
 			isset(request->companies_business_name) ? request->companies_business_name : null
 		);
 
-		$companies->setCompaniesEmail(
+		$readcompanies->setCompaniesEmail(
 			isset(request->companies_email) ? request->companies_email : null
 		);
 
-		$companies->setCompaniesUsername(
+		$readcompanies->setCompaniesUsername(
 			isset(request->companies_username) ? request->companies_username : null
 		);
 
-		return $companies;
+		return $readcompanies;
 	}
 
 	public function getIdcompanies(): ?int {
 		return $this->idcompanies;
 	}
 
-	public function setIdcompanies(?int $idcompanies): Companies {
+	public function setIdcompanies(?int $idcompanies): ReadCompanies {
 		$this->idcompanies = $idcompanies;
 		return $this;
 	}
@@ -67,7 +67,7 @@ class Companies implements \JsonSerializable {
 		return $this->idroles;
 	}
 
-	public function setIdroles(?int $idroles): Companies {
+	public function setIdroles(?int $idroles): ReadCompanies {
 		$this->idroles = $idroles;
 		return $this;
 	}
@@ -76,7 +76,7 @@ class Companies implements \JsonSerializable {
 		return $this->idstates;
 	}
 
-	public function setIdstates(?int $idstates): Companies {
+	public function setIdstates(?int $idstates): ReadCompanies {
 		$this->idstates = $idstates;
 		return $this;
 	}
@@ -85,7 +85,7 @@ class Companies implements \JsonSerializable {
 		return $this->companies_nit;
 	}
 
-	public function setCompaniesNit(?int $companies_nit): Companies {
+	public function setCompaniesNit(?int $companies_nit): ReadCompanies {
 		$this->companies_nit = $companies_nit;
 		return $this;
 	}
@@ -94,7 +94,7 @@ class Companies implements \JsonSerializable {
 		return $this->companies_business_name;
 	}
 
-	public function setCompaniesBusinessName(?string $companies_business_name): Companies {
+	public function setCompaniesBusinessName(?string $companies_business_name): ReadCompanies {
 		$this->companies_business_name = $companies_business_name;
 		return $this;
 	}
@@ -103,7 +103,7 @@ class Companies implements \JsonSerializable {
 		return $this->companies_email;
 	}
 
-	public function setCompaniesEmail(?string $companies_email): Companies {
+	public function setCompaniesEmail(?string $companies_email): ReadCompanies {
 		$this->companies_email = $companies_email;
 		return $this;
 	}
@@ -112,7 +112,7 @@ class Companies implements \JsonSerializable {
 		return $this->companies_username;
 	}
 
-	public function setCompaniesUsername(?string $companies_username): Companies {
+	public function setCompaniesUsername(?string $companies_username): ReadCompanies {
 		$this->companies_username = $companies_username;
 		return $this;
 	}
