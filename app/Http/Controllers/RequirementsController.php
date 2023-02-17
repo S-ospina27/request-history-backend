@@ -78,4 +78,8 @@ class RequirementsController {
 		return $this->requirementsModel->requirementsSelectorDB();
 	}
 
+	public function stateSelector(){
+
+		return $this->requirementsModel->stateSelectorDB();
+	}
 }

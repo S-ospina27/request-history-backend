@@ -30,7 +30,9 @@ class AssignmentRequirementsController {
 
 	public function  update_assignment_requirements() {
 		$responseUpdate=$this->assignmentRequirementsModel->update_assignment_requirementsDB(
-			AssignmentRequirements::formFields()
+			AssignmentRequirements::formFields()->setAssignmentRequirementsFinishDate(
+					(int) request->idstates === 7 ? Carbon::now()->format('Y-m-d') : null
+				)
 		);
 		if ($responseUpdate->status === 'database-error') {
 			return response->error('Ha ocurrido un error al actualizar la  asignación');

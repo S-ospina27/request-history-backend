@@ -29,6 +29,7 @@ Route::prefix("companies", function(){
         Route::get('finished', [RequirementsController::class, 'finishedRequirements']);
         Route::get('requirementsByadmin', [RequirementsController::class, 'readRequirementsAdmin']);
         Route::get('requirementselector', [RequirementsController::class, 'requirementsSelector']);
+        Route::get('stateselector', [RequirementsController::class, 'stateSelector']);
     });
 
 });

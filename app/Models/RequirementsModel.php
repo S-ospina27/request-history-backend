@@ -84,5 +84,11 @@ class RequirementsModel {
 		->where(DB::equalTo("idstates"),3)
 		->getAll();
 	}
+	public function stateSelectorDB(){
+		return DB::table("states")
+					->select()
+					->getAll();
+
+	}
 
 }

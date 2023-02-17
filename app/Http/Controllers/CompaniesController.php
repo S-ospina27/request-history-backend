@@ -16,7 +16,7 @@ class CompaniesController
 	}
 
 	public function createCompanies() {
-		$verifyCompanyExistence = $this->companiesModel->verifyCompanyExistenceDB(companies::formFields());
+		$verifyCompanyExistence = $this->companiesModel->verifyCompanyExistenceDB(Companies::formFields());
 
 		if ($verifyCompanyExistence->cont === 0) {
 			$responseCreate=$this->companiesModel->createCompaniesDB(
@@ -37,7 +37,7 @@ class CompaniesController
 	}
 
 	public function updateCompanies() {
-		$responseUpdate=$this->companiesModel->updateCompaniesDB(companies::formFields());
+		$responseUpdate=$this->companiesModel->updateCompaniesDB(Companies::formFields());
 		if ($responseUpdate->status === 'database-error') {
 			return response->error('Ha ocurrido un error al actualizar la empresa');
 		}
