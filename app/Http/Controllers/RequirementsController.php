@@ -1,16 +1,17 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\RequirementsModel;
 use Carbon\Carbon;
 use Database\Class\Requirements;
 
 class RequirementsController {
+
 	private RequirementsModel $requirementsModel;
 
 	public function __construct() {
 		$this->requirementsModel = new RequirementsModel();
-
 	}
 
 	public function createRequirements() {
@@ -21,68 +22,58 @@ class RequirementsController {
 		if ($verifyRequirementsExistence->cont === 0) {
 			$responseCreate =$this->requirementsModel->createRequirementsDB(
 				Requirements::formFields()
-				->setRequirementsDate(Carbon::now()->format('Y-m-d'))
-				->setIdstates(1)
-			);
+                ->setRequirementsDate(Carbon::now()->format('Y-m-d'))
+                ->setIdstates(1)
+            );
 
 			if ($responseCreate->status === 'database-error') {
 				return response->error('Ha ocurrido un error al crear el requerimiento');
 			}
 
-			return response->success('Requerimiento creado correctamente');
+            return response->success('Requerimiento creado correctamente');
+        }
 
-		}else{
+        return response->info("tienees requerimientos pendientes no puedes agregar mas");
+    }
 
-			return response->info("tienees requerimientos pendientes no puedes agregar mas"
-		);
-		}
-	}
+    public function updateRequirements() {
+        $responseUpdate= $this->requirementsModel->updateRequirementsDB(Requirements::formFields());
 
-	public function updateRequirements(){
-		$responseUpdate= $this->requirementsModel->updateRequirementsDB(Requirements::formFields());
+        if ($responseUpdate->status === 'database-error') {
+            return response->error('Ha ocurrido un error al actualizar el requerimiento');
+        }
 
-		if ($responseUpdate->status === 'database-error') {
-			return response->error('Ha ocurrido un error al actualizar el requerimiento');
-		}
+        return response->success('Requerimiento actualizado correctamente');
+    }
 
-		return response->success('Requerimiento actualizado correctamente');
-	}
+    public function readRequirementsByClients() {
+        return $this->requirementsModel->readRequirementsByClientsDB(Requirements::formFields());
+    }
 
+    public function pendingRequirements() {
+        return $this->requirementsModel->pendingRequirementsDB();
+    }
 
-	public function readRequirementsByClients(){
-		return $this->requirementsModel->readRequirementsByClientsDB(Requirements::formFields());
-	}
+    public function acceptedRequirements() {
+        return $this->requirementsModel->acceptedRequirementsDB();
+    }
 
-	public function pendingRequirements(){
+    public function finishedRequirements() {
+        return $this->requirementsModel->finishedRequirementsDB();
+    }
 
-		return $this->requirementsModel->pendingRequirementsDB();
-	}
+    public function readRequirementsAdmin() {
+        return $this->requirementsModel->readRequirementsAdminDB();
+    }
 
-	public function acceptedRequirements() {
+    public function requirementsSelector(string $idcompanies) {
+        return $this->requirementsModel->requirementsSelectorDB(
+            (new Requirements())->setIdcompanies((int) $idcompanies)
+        );
+    }
 
-		return $this->requirementsModel->acceptedRequirementsDB();
-	}
-
-	public function finishedRequirements() {
-
-		return $this->requirementsModel->finishedRequirementsDB();
-	}
-
-	public function readRequirementsAdmin() {
-
-		return $this->requirementsModel->readRequirementsAdminDB();
-	}
-
-	public function requirementsSelector($idcompanies){
-
-		return $this->requirementsModel->requirementsSelectorDB(
-			(new Requirements())->setIdcompanies((int) $idcompanies)
-		);
-	}
-
-	public function stateSelector(){
-
-		return $this->requirementsModel->stateSelectorDB();
-	}
+    public function stateSelector() {
+        return $this->requirementsModel->stateSelectorDB();
+    }
 
 }

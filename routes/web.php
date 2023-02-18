@@ -21,7 +21,6 @@ Route::prefix("companies", function(){
     Route::post('update', [CompaniesController::class, 'updateCompanies']);
     Route::get('readCompaniesSelector', [CompaniesController::class, 'readCompaniesSelector']);
 
-
     Route::prefix("requirements", function(){
         Route::post('create', [RequirementsController::class, 'createRequirements']);
         Route::post('update', [RequirementsController::class, 'updateRequirements']);
@@ -33,7 +32,6 @@ Route::prefix("companies", function(){
         Route::get('requirementselector/{idcompanies}', [RequirementsController::class, 'requirementsSelector']);
         Route::get('stateselector', [RequirementsController::class, 'stateSelector']);
     });
-
 });
 
 Route::prefix("assignment", function(){

@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Models;
+
 use LionSQL\Drivers\MySQL as DB;
 use Database\Class\Requirements;
 
@@ -19,11 +20,9 @@ class RequirementsModel {
 			$requirements->getIdstates(),
 			$requirements->getRequirementsDate()
 		])->execute();
-
 	}
 
 	public function updateRequirementsDB(Requirements $requirements){
-
 		return DB::call("update_requirements",[
 			$requirements->getRequirementsName(),
 			$requirements->getRequirementsPriority(),
@@ -34,62 +33,62 @@ class RequirementsModel {
 	}
 
 	public function verifyRequirementsExistenceDB(Requirements $requirements){
-		return DB::table('requirements')
-		->select(DB::as(DB::count('*'), 'cont'))
-		->where(DB::equalTo('idstates'), 3)
-		->and(DB::equalTo('idcompanies'), $requirements->getIdcompanies())
-		->get();
-	}
+        return DB::table('requirements')
+            ->select(DB::as(DB::count('*'), 'cont'))
+            ->where(DB::equalTo('idstates'), 3)
+            ->and(DB::equalTo('idcompanies'), $requirements->getIdcompanies())
+            ->get();
+    }
 
-	public function readRequirementsByClientsDB(Requirements $requirements){
-		return DB::view("read_requirements_clients")
-		->select()
-		->where(DB::equalTo('idcompanies'), $requirements->getIdcompanies())
-		->getAll();
-	}
+    public function readRequirementsByClientsDB(Requirements $requirements){
+        return DB::view("read_requirements_clients")
+            ->select()
+            ->where(DB::equalTo('idcompanies'), $requirements->getIdcompanies())
+            ->getAll();
+    }
 
-	public function pendingRequirementsDB(){
-		return DB::table("requirements")
-		->select(DB::as(DB::count('*'),'pendientes'))
-		->where(DB::equalTo('idstates'),1)
-		->get();
-	}
+    public function pendingRequirementsDB(){
+        return DB::table("requirements")
+            ->select(DB::as(DB::count('*'),'pendientes'))
+            ->where(DB::equalTo('idstates'),1)
+            ->get();
+    }
 
-	public function acceptedRequirementsDB(){
-		return DB::table("requirements")
-		->select(DB::as(DB::count('*'),'aceptado'))
-		->where(DB::equalTo('idstates'),3)
-		->get();
-	}
+    public function acceptedRequirementsDB(){
+        return DB::table("requirements")
+            ->select(DB::as(DB::count('*'),'aceptado'))
+            ->where(DB::equalTo('idstates'),3)
+            ->get();
+    }
 
-	public function finishedRequirementsDB(){
-		return DB::table("requirements")
-		->select(DB::as(DB::count('*'),'terminado'))
-		->where(DB::equalTo('idstates'),7)
-		->get();
-	}
+    public function finishedRequirementsDB(){
+        return DB::table("requirements")
+            ->select(DB::as(DB::count('*'),'terminado'))
+            ->where(DB::equalTo('idstates'),7)
+            ->get();
+    }
 
-	public function readRequirementsAdminDB(){
-		return DB::view("read_requirements_admin")
-		->select()
-		->getAll();
-	}
+    public function readRequirementsAdminDB(){
+        return DB::view("read_requirements_admin")
+            ->select()
+            ->getAll();
+    }
 
-	public function requirementsSelectorDB(Requirements $requirements) {
-		return DB::table("requirements")
-		->select(
-			DB::column("idrequirements"),
-			DB::column("requirements_name")
-			)
-		->where(DB::equalTo("idcompanies"),$requirements->getIdcompanies())
-		->and(DB::equalTo("idstates"),3)
-		->get();
-	}
-	public function stateSelectorDB(){
-		return DB::table("states")
-					->select()
-					->getAll();
+    public function requirementsSelectorDB(Requirements $requirements) {
+        return DB::table("requirements")
+            ->select(
+               DB::column("idrequirements"),
+               DB::column("requirements_name")
+            )
+            ->where(DB::equalTo("idcompanies"),$requirements->getIdcompanies())
+            ->and(DB::equalTo("idstates"),3)
+            ->getAll();
+    }
 
-	}
+    public function stateSelectorDB(){
+        return DB::table("states")
+            ->select()
+            ->getAll();
+    }
 
 }
