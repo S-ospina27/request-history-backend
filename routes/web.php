@@ -19,6 +19,8 @@ use App\Http\Controllers\RequirementsController;
 Route::prefix("companies", function(){
     Route::post('create', [CompaniesController::class, 'createCompanies']);
     Route::post('update', [CompaniesController::class, 'updateCompanies']);
+    Route::get('readCompaniesSelector', [CompaniesController::class, 'readCompaniesSelector']);
+
 
     Route::prefix("requirements", function(){
         Route::post('create', [RequirementsController::class, 'createRequirements']);
@@ -28,7 +30,7 @@ Route::prefix("companies", function(){
         Route::get('accepted', [RequirementsController::class, 'acceptedRequirements']);
         Route::get('finished', [RequirementsController::class, 'finishedRequirements']);
         Route::get('requirementsByadmin', [RequirementsController::class, 'readRequirementsAdmin']);
-        Route::get('requirementselector', [RequirementsController::class, 'requirementsSelector']);
+        Route::get('requirementselector/{idcompanies}', [RequirementsController::class, 'requirementsSelector']);
         Route::get('stateselector', [RequirementsController::class, 'stateSelector']);
     });
 

@@ -73,13 +73,16 @@ class RequirementsController {
 		return $this->requirementsModel->readRequirementsAdminDB();
 	}
 
-	public function requirementsSelector(){
+	public function requirementsSelector($idcompanies){
 
-		return $this->requirementsModel->requirementsSelectorDB();
+		return $this->requirementsModel->requirementsSelectorDB(
+			(new Requirements())->setIdcompanies((int) $idcompanies)
+		);
 	}
 
 	public function stateSelector(){
 
 		return $this->requirementsModel->stateSelectorDB();
 	}
+
 }

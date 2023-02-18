@@ -75,14 +75,15 @@ class RequirementsModel {
 		->getAll();
 	}
 
-	public function requirementsSelectorDB() {
+	public function requirementsSelectorDB(Requirements $requirements) {
 		return DB::table("requirements")
 		->select(
 			DB::column("idrequirements"),
 			DB::column("requirements_name")
 			)
-		->where(DB::equalTo("idstates"),3)
-		->getAll();
+		->where(DB::equalTo("idcompanies"),$requirements->getIdcompanies())
+		->and(DB::equalTo("idstates"),3)
+		->get();
 	}
 	public function stateSelectorDB(){
 		return DB::table("states")

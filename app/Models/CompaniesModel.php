@@ -31,6 +31,13 @@ class CompaniesModel {
             ->get();
     }
 
+    public function readCompaniesSelectorDB(){
+    	return DB::view("read_companies_selector")
+    		->select()
+    		->getAll();
+
+    }
+
 	public function updateCompaniesDB(Companies $companies) {
 		return DB::call("update_companies", [
             $companies->getIdroles(),
