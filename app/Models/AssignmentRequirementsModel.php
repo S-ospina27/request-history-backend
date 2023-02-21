@@ -10,7 +10,7 @@ class AssignmentRequirementsModel {
 		
 	}
 
-	public function create_assignment_requirementsDB(AssignmentRequirements $assignmentRequirements){
+	public function createAssignmentrequirementsDB(AssignmentRequirements $assignmentRequirements){
 
 		return DB::call("create_assignment_requirements",[
 			$assignmentRequirements->getIdrequirements(),
@@ -30,6 +30,12 @@ class AssignmentRequirementsModel {
 			$assignmentRequirements->getIdassignmentRequirements()
 		])->execute();
 
+	}
+
+	public function ReadAssignmentRequirementsSelectDB(){
+		return DB::view("read_assigment_requirements_select")
+			->select()
+			->getAll();
 	}
 
 }

@@ -35,6 +35,10 @@ class DevelopersController {
 		return response->success('Desarrollador actualizado correctamente');
 	}
 
+	public function readDevelopersSelect(){
+		return $this->developersModel->readDevelopersSelectDB();
+	}
+
 }
 
 

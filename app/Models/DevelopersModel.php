@@ -27,4 +27,9 @@ class DevelopersModel {
 		])->execute();
 	}
 
+	public function readDevelopersSelectDB() {
+		return DB::view("read_developers_selector")
+			->select()
+			->getAll();
+	}
 }

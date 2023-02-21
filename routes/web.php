@@ -35,24 +35,38 @@ Route::prefix("companies", function(){
 });
 
 Route::prefix("assignment", function(){
-    Route::post('create', [AssignmentRequirementsController::class, 'create_assignment_requirements']);
+    Route::post('create', [AssignmentRequirementsController::class, 'createAssignmentrequirements']);
     Route::post('update', [AssignmentRequirementsController::class, 'update_assignment_requirements']);
 
+    Route::prefix("read", function(){
+        Route::get('select', [AssignmentRequirementsController::class, 'ReadAssignmentRequirementsSelect']);
+    });
+
     Route::prefix("developers", function(){
-        Route::post('create', [AssignmentRequirementsHasDevelopersController::class, 'createAssignmentRequirementsHasDevelopers']
-        );
-         Route::post('delete', [AssignmentRequirementsHasDevelopersController::class, 'deletesignmentRequirementsHasDevelopers']
-       );
-         Route::post('update', [AssignmentRequirementsHasDevelopersController::class, 'updatessignmentRequirementsHasDevelopers']
-       );
+        Route::post('create', [AssignmentRequirementsHasDevelopersController::class, 'createAssignmentRequirementsHasDevelopers']);
+        Route::post('delete', [AssignmentRequirementsHasDevelopersController::class, 'deletesignmentRequirementsHasDevelopers']);
+        Route::post('update', [AssignmentRequirementsHasDevelopersController::class, 'updatessignmentRequirementsHasDevelopers']);
+
+         Route::prefix("read", function(){
+            Route::get('assigment', [AssignmentRequirementsHasDevelopersController::class, 'readAssigmentHasDevelopers']);
+        });
+
     });
 
 });
 
+
 Route::prefix("developers", function(){
     Route::post('create', [DevelopersController::class, 'createDevelopers']);
     Route::post('update', [DevelopersController::class, 'updateDevelopers']);
+
+    Route::prefix("read", function(){
+        Route::get('select', [DevelopersController::class, 'readDevelopersSelect']);
+    });
+
 });
+
+
 
 
 

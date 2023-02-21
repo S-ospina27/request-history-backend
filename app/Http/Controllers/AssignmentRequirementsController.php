@@ -14,9 +14,9 @@ class AssignmentRequirementsController {
 
 	}
 
-	public function create_assignment_requirements() {
+	public function createAssignmentrequirements() {
 
-		$responseCreate=$this->assignmentRequirementsModel->create_assignment_requirementsDB(
+		$responseCreate=$this->assignmentRequirementsModel->createAssignmentrequirementsDB(
 			AssignmentRequirements::formFields()
 			->setIdstates(1)
 			->setAssignmentRequirementsDate(Carbon::now()->format('Y-m-d'))
@@ -39,5 +39,9 @@ class AssignmentRequirementsController {
 		}
 
 		return response->success('Asignación  actualizada correctamente');
+	}
+
+	public function ReadAssignmentRequirementsSelect(){
+		return $this->assignmentRequirementsModel->ReadAssignmentRequirementsSelectDB();
 	}
 }
