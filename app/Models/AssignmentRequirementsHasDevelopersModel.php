@@ -29,11 +29,12 @@ class AssignmentRequirementsHasDevelopersModel {
 		])->execute();
 	}
 
-	public function deletesignmentRequirementsHasDevelopersDB(AssignmentRequirementsHasDevelopers $assignmentRequirementsHasDevelopers){
-
-		return DB::call("delete_idassignment_requirements_has_developers",[
-			$assignmentRequirementsHasDevelopers->getIdassignmentRequirementsHasDevelopers()
-		])->execute();
+	public function deletesignmentRequirementsHasDevelopersDB(array $idassignment_requirements_has_developers){
+		return DB::table("assignment_requirements_has_developers")
+			->delete()
+			->where("idassignment_requirements_has_developers")
+			->in(...$idassignment_requirements_has_developers)
+			->execute();
 	}
 
 	public function readAssigmentHasDevelopersDB() {

@@ -50,8 +50,8 @@ class AssignmentRequirementsHasDevelopersController {
 	}
 
 	public function  deletesignmentRequirementsHasDevelopers(){
-		$responseDelete= $this->assignmentRequirementsHasDevelopersModel->deletesignmentRequirementsHasDevelopersDB(
-			AssignmentRequirementsHasDevelopers::formFields()
+		return $responseDelete= $this->assignmentRequirementsHasDevelopersModel->deletesignmentRequirementsHasDevelopersDB(
+			request->idassignment_requirements_has_developers
 		);
 
 		if ($responseDelete->status === 'database-error') {
