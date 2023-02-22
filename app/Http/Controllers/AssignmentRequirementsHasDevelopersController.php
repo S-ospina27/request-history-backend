@@ -50,7 +50,7 @@ class AssignmentRequirementsHasDevelopersController {
 	}
 
 	public function  deletesignmentRequirementsHasDevelopers(){
-		return $responseDelete= $this->assignmentRequirementsHasDevelopersModel->deletesignmentRequirementsHasDevelopersDB(
+		   $responseDelete= $this->assignmentRequirementsHasDevelopersModel->deletesignmentRequirementsHasDevelopersDB(
 			request->idassignment_requirements_has_developers
 		);
 
