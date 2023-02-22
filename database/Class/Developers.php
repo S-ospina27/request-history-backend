@@ -5,9 +5,12 @@ namespace Database\Class;
 class Developers implements \JsonSerializable {
 
 	private ?int $iddevelopers = null;
+	private ?int $idroles = null;
+	private ?int $idstates = null;
 	private ?string $developers_name = null;
 	private ?string $developerscol_type = null;
-	private ?int $idstates = null;
+	private ?string $developers_email = null;
+	private ?string $developers_password = null;
 
 	public function __construct() {
 
@@ -21,7 +24,15 @@ class Developers implements \JsonSerializable {
 		$developers = new Developers();
 
 		$developers->setIddevelopers(
-			isset(request->iddevelopers) ? request->iddevelopers : null
+			isset(request->iddevelopers) ? (int) request->iddevelopers : null
+		);
+
+		$developers->setIdroles(
+			isset(request->idroles) ? (int) request->idroles : null
+		);
+
+		$developers->setIdstates(
+			isset(request->idstates) ? (int) request->idstates : null
 		);
 
 		$developers->setDevelopersName(
@@ -32,8 +43,12 @@ class Developers implements \JsonSerializable {
 			isset(request->developerscol_type) ? request->developerscol_type : null
 		);
 
-		$developers->setIdstates(
-			isset(request->idstates) ? request->idstates : null
+		$developers->setDevelopersEmail(
+			isset(request->developers_email) ? request->developers_email : null
+		);
+
+		$developers->setDevelopersPassword(
+			isset(request->developers_password) ? request->developers_password : null
 		);
 
 		return $developers;
@@ -45,6 +60,24 @@ class Developers implements \JsonSerializable {
 
 	public function setIddevelopers(?int $iddevelopers): Developers {
 		$this->iddevelopers = $iddevelopers;
+		return $this;
+	}
+
+	public function getIdroles(): ?int {
+		return $this->idroles;
+	}
+
+	public function setIdroles(?int $idroles): Developers {
+		$this->idroles = $idroles;
+		return $this;
+	}
+
+	public function getIdstates(): ?int {
+		return $this->idstates;
+	}
+
+	public function setIdstates(?int $idstates): Developers {
+		$this->idstates = $idstates;
 		return $this;
 	}
 
@@ -66,12 +99,21 @@ class Developers implements \JsonSerializable {
 		return $this;
 	}
 
-	public function getIdstates(): ?int {
-		return $this->idstates;
+	public function getDevelopersEmail(): ?string {
+		return $this->developers_email;
 	}
 
-	public function setIdstates(?int $idstates): Developers {
-		$this->idstates = $idstates;
+	public function setDevelopersEmail(?string $developers_email): Developers {
+		$this->developers_email = $developers_email;
+		return $this;
+	}
+
+	public function getDevelopersPassword(): ?string {
+		return $this->developers_password;
+	}
+
+	public function setDevelopersPassword(?string $developers_password): Developers {
+		$this->developers_password = $developers_password;
 		return $this;
 	}
 

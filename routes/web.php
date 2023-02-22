@@ -2,8 +2,10 @@
 
 use App\Http\Controllers\AssignmentRequirementsController;
 use App\Http\Controllers\AssignmentRequirementsHasDevelopersController;
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\CompaniesController;
 use App\Http\Controllers\DevelopersController;
+use App\Http\Controllers\Manage\RolesController;
 use App\Http\Controllers\RequirementsController;
 use LionRoute\Route;
 
@@ -14,6 +16,12 @@ use LionRoute\Route;
  * Here is where you can register web routes for your application
  * ------------------------------------------------------------------------------
  **/
+
+Route::prefix('auth', function() {
+    Route::post('login', [LoginController::class, 'auth']);
+});
+
+Route::get('read-roles', [RolesController::class, 'readRoles']);
 
 Route::prefix("companies", function() {
     Route::post('create', [CompaniesController::class, 'createCompanies']);
@@ -57,6 +65,7 @@ Route::prefix("developers", function() {
     Route::post('update', [DevelopersController::class, 'updateDevelopers']);
 
     Route::prefix("read", function() {
+        Route::get('/', [DevelopersController::class, 'readDevelopers']);
         Route::get('select', [DevelopersController::class, 'readDevelopersSelect']);
     });
 });
