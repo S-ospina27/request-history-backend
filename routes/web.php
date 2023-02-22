@@ -2,11 +2,10 @@
 
 use App\Http\Controllers\AssignmentRequirementsController;
 use App\Http\Controllers\AssignmentRequirementsHasDevelopersController;
-use LionRoute\Route;
-use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\CompaniesController;
 use App\Http\Controllers\DevelopersController;
 use App\Http\Controllers\RequirementsController;
+use LionRoute\Route;
 
 /**
  * ------------------------------------------------------------------------------
@@ -47,14 +46,11 @@ Route::prefix("assignment", function(){
         Route::post('delete', [AssignmentRequirementsHasDevelopersController::class, 'deletesignmentRequirementsHasDevelopers']);
         Route::post('update', [AssignmentRequirementsHasDevelopersController::class, 'updatessignmentRequirementsHasDevelopers']);
 
-         Route::prefix("read", function(){
+        Route::prefix("read", function(){
             Route::get('assigment', [AssignmentRequirementsHasDevelopersController::class, 'readAssigmentHasDevelopers']);
         });
-
     });
-
 });
-
 
 Route::prefix("developers", function(){
     Route::post('create', [DevelopersController::class, 'createDevelopers']);
@@ -63,11 +59,4 @@ Route::prefix("developers", function(){
     Route::prefix("read", function(){
         Route::get('select', [DevelopersController::class, 'readDevelopersSelect']);
     });
-
 });
-
-
-
-
-
-
