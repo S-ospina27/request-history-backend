@@ -2,6 +2,7 @@
 
 namespace App\Models\Auth;
 
+use Database\Class\Developers;
 use LionSQL\Drivers\MySQL as DB;
 
 class LoginModel {
@@ -10,11 +11,18 @@ class LoginModel {
 
 	}
 
-    public function authDB() {
-        return DB::table('users')
+    public function authDB(Developers $developers) {
+        return DB::table('developers')
             ->select(DB::as(DB::count('*'), "cont"))
-            ->where(DB::equalTo("users_email"), request->users_email)
-            ->and(DB::equalTo("users_password"), request->users_password)
+            ->where(DB::equalTo("developers_email"), $developers->getDevelopersEmail())
+            ->get();
+    }
+
+    public function sessionDB(Developers $developers): Developers {
+        return DB::fetchClass(Developers::class)
+            ->table('developers')
+            ->select('iddevelopers', 'idstates', 'idroles', 'developerscol_type', 'developers_name', 'developers_password')
+            ->where(DB::equalTo("developers_email"), $developers->getDevelopersEmail())
             ->get();
     }
 
