@@ -38,4 +38,11 @@ class AssignmentRequirementsModel {
 			->getAll();
 	}
 
+	public function verifyExistenAssigmentsDB(AssignmentRequirements $assignmentRequirements){
+		return DB::table('assignment_requirements')
+            ->select(DB::as(DB::count('*'), 'cont'))
+            ->where(DB::equalTo('idrequirements'), $assignmentRequirements->getIdrequirements())
+            ->get();
+	}
+
 }

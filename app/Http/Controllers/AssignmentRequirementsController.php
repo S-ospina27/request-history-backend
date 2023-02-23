@@ -16,6 +16,13 @@ class AssignmentRequirementsController {
 
 	public function createAssignmentrequirements() {
 
+		$verifyExist=$this->assignmentRequirementsModel->verifyExistenAssigmentsDB(
+			(new  AssignmentRequirements())->setIdrequirements( (int) request->idrequirements)
+		);
+
+		if ($verifyExist->cont > 0) {
+			return response->error("ya existe una asignación creada para ese requerimiento");
+		}
 		$responseCreate=$this->assignmentRequirementsModel->createAssignmentrequirementsDB(
 			AssignmentRequirements::formFields()
 			->setIdstates(1)
@@ -31,8 +38,8 @@ class AssignmentRequirementsController {
 	public function  update_assignment_requirements() {
 		$responseUpdate=$this->assignmentRequirementsModel->update_assignment_requirementsDB(
 			AssignmentRequirements::formFields()->setAssignmentRequirementsFinishDate(
-					(int) request->idstates === 7 ? Carbon::now()->format('Y-m-d') : null
-				)
+				(int) request->idstates === 7 ? Carbon::now()->format('Y-m-d') : null
+			)
 		);
 		if ($responseUpdate->status === 'database-error') {
 			return response->error('Ha ocurrido un error al actualizar la  asignación');
