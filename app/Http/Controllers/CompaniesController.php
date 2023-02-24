@@ -19,7 +19,7 @@ class CompaniesController {
 
 		if ($verifyCompanyExistence->cont === 0) {
 			$responseCreate = $this->companiesModel->createCompaniesDB(
-				$companies->setIdstates(4)->setIdroles(2)
+				$companies->setIdstates(5)->setIdroles(2)
 			);
 
 			if ($responseCreate->status === 'database-error') {
@@ -29,33 +29,36 @@ class CompaniesController {
 			return response->error("La cuenta no existe", $companies);
 		}
 
-		$idcompanies = $this->companiesModel->readCompaniesByNit($companies);
-		$responseUpdate = $this->companiesModel->updateCompaniesDB(
-			$companies->setIdstates(4)->setIdroles(2)->setIdcompanies($idcompanies->getIdcompanies())
-		);
+        $idcompanies = $this->companiesModel->readCompaniesByNit($companies);
 
-		if ($responseUpdate->status === 'database-error') {
-			return response->error('Ha ocurrido un error al ingresar la empresa', $companies);
-		}
+        if ($verifyCompanyExistence->idstates === 5) {
+            $responseUpdate = $this->companiesModel->updateCompaniesDB(
+                $companies->setIdstates(4)->setIdroles(2)->setIdcompanies($idcompanies->getIdcompanies())
+            );
 
-		return response->info("Ingreso exitoso", [
-			'idcompanies' => $idcompanies->getIdcompanies(),
-			'idroles' => $companies->getIdroles(),
-			'companies_nit' => $companies->getCompaniesNit()
-		]);
-	}
+            if ($responseUpdate->status === 'database-error') {
+                return response->error('Ha ocurrido un error al ingresar la empresa', $companies);
+            }
+        }
 
-	public function updateCompanies() {
-		$responseUpdate = $this->companiesModel->updateCompaniesDB(Companies::formFields());
-		if ($responseUpdate->status === 'database-error') {
-			return response->error('Ha ocurrido un error al actualizar la empresa');
-		}
+        return response->info("Ingreso exitoso", [
+            'idcompanies' => $idcompanies->getIdcompanies(),
+            'idroles' => $companies->getIdroles(),
+            'companies_nit' => $companies->getCompaniesNit()
+        ]);
+    }
 
-		return response->success('Empresa actualizada correctamente');
-	}
+    public function updateCompanies() {
+        $responseUpdate = $this->companiesModel->updateCompaniesDB(Companies::formFields());
+        if ($responseUpdate->status === 'database-error') {
+            return response->error('Ha ocurrido un error al actualizar la empresa');
+        }
 
-	public function readCompaniesSelector() {
-		return $this->companiesModel->readCompaniesSelectorDB();
-	}
+        return response->success('Empresa actualizada correctamente');
+    }
+
+    public function readCompaniesSelector() {
+        return $this->companiesModel->readCompaniesSelectorDB();
+    }
 
 }

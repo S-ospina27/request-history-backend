@@ -12,6 +12,14 @@ class CompaniesModel {
 		
 	}
 
+    public function verifyCompanyExistenceDB(Companies $companies){
+        return DB::table('companies')
+            ->select(DB::as(DB::count('*'), 'cont'), 'idstates')
+            ->where(DB::equalTo('companies_nit'), $companies->getCompaniesNit())
+            ->and(DB::equalTo('companies_email'), $companies->getCompaniesEmail())
+            ->get();
+    }
+
 	public function createCompaniesDB(Companies $companies){
 		return DB::call("create_companies",[
             $companies->getIdroles(),
@@ -48,14 +56,6 @@ class CompaniesModel {
 			$companies->getCompaniesUsername(),
             $companies->getIdcompanies()
 		])->execute();
-	}
-
-	public function verifyCompanyExistenceDB(Companies $companies){
-		return DB::table('companies')
-            ->select(DB::as(DB::count('*'), 'cont'))
-            ->where(DB::equalTo('companies_nit'), $companies->getCompaniesNit())
-            ->and(DB::equalTo('companies_email'), $companies->getCompaniesEmail())
-            ->get();
 	}
 
 }
