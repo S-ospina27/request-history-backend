@@ -2,16 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AssignmentRequirementsModel;
 use App\Models\RequirementsModel;
 use Carbon\Carbon;
+use Database\Class\Companies;
 use Database\Class\Requirements;
 
 class RequirementsController {
 
 	private RequirementsModel $requirementsModel;
+    private AssignmentRequirementsModel $assignmentRequirementsModel;
 
 	public function __construct() {
 		$this->requirementsModel = new RequirementsModel();
+        $this->assignmentRequirementsModel = new AssignmentRequirementsModel();
 	}
 
 	public function createRequirements() {
@@ -66,10 +70,23 @@ class RequirementsController {
         return $this->requirementsModel->readRequirementsAdminDB();
     }
 
-    public function requirementsSelector(string $idcompanies) {
-        return $this->requirementsModel->requirementsSelectorDB(
-            (new Requirements())->setIdcompanies((int) $idcompanies)
+    public function readRequirementsSelector(string $idcompanies) {
+        $data = [];
+        $requeriments = $this->requirementsModel->readRequirementsSelectorDB(
+            (new Companies())->setIdcompanies((int) $idcompanies)
         );
+
+        foreach ($requeriments as $key => $requeriment) {
+            $cont = $this->assignmentRequirementsModel->readAssignmentRequirementsByRequerimentDB(
+                $requeriment
+            );
+
+            if ($cont->cont === 0) {
+                array_push($data, $requeriment);
+            }
+        }
+
+        return $data;
     }
 
     public function stateSelector() {

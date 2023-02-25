@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Database\Class\Companies;
 use LionSQL\Drivers\MySQL as DB;
 use Database\Class\Requirements;
 
@@ -73,13 +74,14 @@ class RequirementsModel {
             ->getAll();
     }
 
-    public function requirementsSelectorDB(Requirements $requirements) {
-        return DB::table("requirements")
+    public function readRequirementsSelectorDB(Companies $companies) {
+        return DB::fetchClass(Requirements::class)
+            ->table("requirements")
             ->select(
                DB::column("idrequirements"),
                DB::column("requirements_name")
             )
-            ->where(DB::equalTo("idcompanies"),$requirements->getIdcompanies())
+            ->where(DB::equalTo("idcompanies"), $companies->getIdcompanies())
             ->and(DB::equalTo("idstates"),3)
             ->getAll();
     }
