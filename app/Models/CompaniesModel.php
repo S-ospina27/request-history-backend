@@ -39,11 +39,18 @@ class CompaniesModel {
             ->get();
     }
 
-    public function readCompaniesSelectorDB(){
-    	return DB::view("read_companies_selector")
-    		->select()
-    		->getAll();
+    public function readCompaniesDB() {
+        return DB::view('read_companies')
+            ->select()
+            ->getAll();
+    }
 
+    public function readCompaniesSelectorDB(Companies $companies) {
+    	return DB::table('requirements')
+            ->select(DB::as(DB::count('*'), 'cont'))
+            ->where(DB::equalTo('idcompanies'), $companies->getIdcompanies())
+            ->and(DB::equalTo('idstates'), 3)
+            ->get();
     }
 
 	public function updateCompaniesDB(Companies $companies) {

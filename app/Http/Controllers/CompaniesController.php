@@ -58,7 +58,21 @@ class CompaniesController {
     }
 
     public function readCompaniesSelector() {
-        return $this->companiesModel->readCompaniesSelectorDB();
+        $data = [];
+        $companies = $this->companiesModel->readCompaniesDB();
+
+        foreach ($companies as $key => $company) {
+            $cont = $this->companiesModel->readCompaniesSelectorDB(
+                (new Companies())
+                    ->setIdcompanies((int) $company->idcompanies)
+            );
+
+            if ($cont->cont > 0) {
+                array_push($data, $company);
+            }
+        }
+
+        return $data;
     }
 
 }

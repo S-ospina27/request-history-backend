@@ -26,9 +26,7 @@ Route::get('read-roles', [RolesController::class, 'readRoles']);
 Route::prefix("companies", function() {
     Route::post('create', [CompaniesController::class, 'createCompanies']);
     Route::post('update', [CompaniesController::class, 'updateCompanies']);
-    Route::get('readCompaniesSelector', [CompaniesController::class, 'readCompaniesSelector']);
-
-
+    Route::get('read-companies-selector', [CompaniesController::class, 'readCompaniesSelector']);
 
     Route::prefix("requirements", function() {
         Route::post('create', [RequirementsController::class, 'createRequirements']);
@@ -42,7 +40,6 @@ Route::prefix("companies", function() {
         Route::get('stateselector', [RequirementsController::class, 'stateSelector']);
     });
 });
-
 
 Route::prefix("assignment", function() {
     Route::post('create', [AssignmentRequirementsController::class, 'createAssignmentrequirements']);
@@ -60,8 +57,6 @@ Route::prefix("assignment", function() {
         Route::prefix("read", function() {
             Route::get('bydevelopers/{iddevelopers}', [AssignmentRequirementsHasDevelopersController::class, 'readAssigmentDevelopers']);
             Route::get('assigment', [AssignmentRequirementsHasDevelopersController::class, 'readAssigmentHasDevelopers']);
-
-
         });
     });
 });
