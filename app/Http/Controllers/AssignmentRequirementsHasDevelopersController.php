@@ -50,7 +50,7 @@ class AssignmentRequirementsHasDevelopersController {
 	}
 
 	public function  deletesignmentRequirementsHasDevelopers(){
-		   $responseDelete= $this->assignmentRequirementsHasDevelopersModel->deletesignmentRequirementsHasDevelopersDB(
+		$responseDelete= $this->assignmentRequirementsHasDevelopersModel->deletesignmentRequirementsHasDevelopersDB(
 			request->idassignment_requirements_has_developers
 		);
 
@@ -67,6 +67,10 @@ class AssignmentRequirementsHasDevelopersController {
 		return $this->assignmentRequirementsHasDevelopersModel->readAssigmentHasDevelopersDB();
 	}
 
-
+	public function readAssigmentDevelopers(string $iddevelopers){
+		return $this->assignmentRequirementsHasDevelopersModel->readAssigmentDevelopersDB(
+			(new AssignmentRequirementsHasDevelopers())->setIddevelopers( (int) $iddevelopers)
+		);
+	}
 
 }

@@ -51,4 +51,12 @@ class AssignmentRequirementsHasDevelopersModel {
 		->get();
 	}
 
+
+public function readAssigmentDevelopersDB(AssignmentRequirementsHasDevelopers $assignmentRequirementsHasDevelopers) {
+		return DB::view("read_developers_table")
+		->select()
+		->where(DB::equalTo("iddevelopers"),$assignmentRequirementsHasDevelopers->getIddevelopers())
+		->getAll();
+	}
+
 }
