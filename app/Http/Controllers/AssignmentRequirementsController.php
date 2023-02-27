@@ -7,27 +7,29 @@ use Carbon\Carbon;
 use Database\Class\AssignmentRequirements;
 
 class AssignmentRequirementsController {
+
 	private AssignmentRequirementsModel $assignmentRequirementsModel;
 
 	public function __construct() {
 		$this->assignmentRequirementsModel = new AssignmentRequirementsModel();
-
 	}
 
 	public function createAssignmentrequirements() {
-
-		$verifyExist=$this->assignmentRequirementsModel->verifyExistenAssigmentsDB(
-			(new  AssignmentRequirements())->setIdrequirements( (int) request->idrequirements)
+		$verifyExist = $this->assignmentRequirementsModel->verifyExistenAssigmentsDB(
+			(new  AssignmentRequirements())
+                ->setIdrequirements((int) request->idrequirements)
 		);
 
 		if ($verifyExist->cont > 0) {
 			return response->error("ya existe una asignación creada para ese requerimiento");
 		}
+
 		$responseCreate=$this->assignmentRequirementsModel->createAssignmentrequirementsDB(
 			AssignmentRequirements::formFields()
 			->setIdstates(1)
 			->setAssignmentRequirementsDate(Carbon::now()->format('Y-m-d'))
 		);
+
 		if ($responseCreate->status === 'database-error') {
 			return response->error('Ha ocurrido un error al actualizar la  asignación');
 		}
@@ -41,6 +43,7 @@ class AssignmentRequirementsController {
 				(int) request->idstates === 7 ? Carbon::now()->format('Y-m-d') : null
 			)
 		);
+
 		if ($responseUpdate->status === 'database-error') {
 			return response->error('Ha ocurrido un error al actualizar la  asignación');
 		}

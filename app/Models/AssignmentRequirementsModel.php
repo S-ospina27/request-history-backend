@@ -43,6 +43,14 @@ class AssignmentRequirementsModel {
 		])->execute();
 	}
 
+    public function updateRequirementStateDB(AssignmentRequirements $assignmentRequirements) {
+        return DB::table('assignment_requirements')->update([
+            'idstates' => $assignmentRequirements->getIdstates()
+        ])->where(
+            DB::equalTo('idassignment_requirements'), $assignmentRequirements->getIdassignmentRequirements()
+        )->execute();
+    }
+
 	public function verifyExistenAssigmentsDB(AssignmentRequirements $assignmentRequirements) {
 		return DB::table('assignment_requirements')
             ->select(DB::as(DB::count('*'), 'cont'))
