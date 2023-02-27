@@ -59,4 +59,18 @@ public function readAssigmentDevelopersDB(AssignmentRequirementsHasDevelopers $a
 		->getAll();
 	}
 
+	public function tasksAssignedStatusDB() {
+		return DB::view("assignment_requirements_has_developers")
+		->select(DB::as(DB::count('*'), 'cont'))
+		->where(DB::equalTo("idstates"),6)
+		->get();
+	}
+
+	public function tasksFinishedStatusDB() {
+		return DB::view("assignment_requirements_has_developers")
+		->select(DB::as(DB::count('*'), 'cont'))
+		->where(DB::equalTo("idstates"),7)
+		->get();
+	}
+
 }

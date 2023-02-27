@@ -73,4 +73,11 @@ class AssignmentRequirementsHasDevelopersController {
 		);
 	}
 
+	public function tasksAssignedStatus(){
+		return $this->assignmentRequirementsHasDevelopersModel->tasksAssignedStatusDB();
+	}
+
+		public function tasksFinishedStatus(){
+		return $this->assignmentRequirementsHasDevelopersModel->tasksFinishedStatusDB();
+	}
 }
