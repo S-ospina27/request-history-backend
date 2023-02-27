@@ -54,4 +54,9 @@ class AssignmentRequirementsController {
 	public function ReadAssignmentRequirementsSelect(){
 		return $this->assignmentRequirementsModel->ReadAssignmentRequirementsSelectDB();
 	}
+
+	public function readAssigmentsRequirements(){
+		return $this->assignmentRequirementsModel->readAssigmentsRequirementsDB();
+
+	}
 }

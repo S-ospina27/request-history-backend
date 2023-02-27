@@ -58,4 +58,10 @@ class AssignmentRequirementsModel {
             ->get();
 	}
 
+	public function readAssigmentsRequirementsDB(){
+		return DB::view("read_assigments_requirements")
+			->select()
+			->getAll();
+	}
+
 }

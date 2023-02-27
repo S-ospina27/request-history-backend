@@ -47,6 +47,8 @@ Route::prefix("assignment", function() {
 
     Route::prefix("read", function() {
         Route::get('select', [AssignmentRequirementsController::class, 'ReadAssignmentRequirementsSelect']);
+         Route::get('read_assigments', [AssignmentRequirementsController::class, 'readAssigmentsRequirements']);
+
     });
 
     Route::prefix("developers", function() {
