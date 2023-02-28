@@ -61,14 +61,16 @@ class CompaniesController {
         $data = [];
         $companies = $this->companiesModel->readCompaniesDB();
 
-        foreach ($companies as $key => $company) {
-            $cont = $this->companiesModel->readCompaniesSelectorDB(
-                (new Companies())
+        if (!isset($companies->status)) {
+            foreach ($companies as $key => $company) {
+                $cont = $this->companiesModel->readCompaniesSelectorDB(
+                    (new Companies())
                     ->setIdcompanies((int) $company->idcompanies)
-            );
+                );
 
-            if ($cont->cont > 0) {
-                array_push($data, $company);
+                if ($cont->cont > 0) {
+                    array_push($data, $company);
+                }
             }
         }
 
