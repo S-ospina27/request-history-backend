@@ -43,12 +43,11 @@ Route::prefix("companies", function() {
 
 Route::prefix("assignment", function() {
     Route::post('create', [AssignmentRequirementsController::class, 'createAssignmentrequirements']);
-    Route::post('update', [AssignmentRequirementsController::class, 'update_assignment_requirements']);
+    Route::post('update', [AssignmentRequirementsController::class, 'updateAssignmentRequirements']);
 
     Route::prefix("read", function() {
         Route::get('select', [AssignmentRequirementsController::class, 'ReadAssignmentRequirementsSelect']);
-         Route::get('read_assigments', [AssignmentRequirementsController::class, 'readAssigmentsRequirements']);
-
+        Route::get('read_assigments', [AssignmentRequirementsController::class, 'readAssigmentsRequirements']);
     });
 
     Route::prefix("developers", function() {
@@ -59,8 +58,8 @@ Route::prefix("assignment", function() {
         Route::prefix("read", function() {
             Route::get('bydevelopers/{iddevelopers}', [AssignmentRequirementsHasDevelopersController::class, 'readAssigmentDevelopers']);
             Route::get('assigment', [AssignmentRequirementsHasDevelopersController::class, 'readAssigmentHasDevelopers']);
-             Route::get('tasks-assigned-status', [AssignmentRequirementsHasDevelopersController::class, 'tasksAssignedStatus']);
-             Route::get('tasks-finished-status', [AssignmentRequirementsHasDevelopersController::class, 'tasksFinishedStatus']);
+            Route::get('tasks-assigned-status', [AssignmentRequirementsHasDevelopersController::class, 'tasksAssignedStatus']);
+            Route::get('tasks-finished-status', [AssignmentRequirementsHasDevelopersController::class, 'tasksFinishedStatus']);
         });
     });
 });

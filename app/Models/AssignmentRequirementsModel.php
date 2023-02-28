@@ -34,7 +34,7 @@ class AssignmentRequirementsModel {
             ->get();
     }
 
-	public function update_assignment_requirementsDB(AssignmentRequirements $assignmentRequirements) {
+	public function updateAssignmentRequirementsDB(AssignmentRequirements $assignmentRequirements) {
 		return DB::call("update_assignment_requirements", [
 			$assignmentRequirements->getIdstates(),
 			$assignmentRequirements->getAssignmentRequirementsDeadline(),
