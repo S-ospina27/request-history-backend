@@ -41,38 +41,40 @@ Route::prefix('api', function() {
     });
 
     Route::middleware(["jwt-authorize", "all-access"], function() {
-        Route::get('read-roles', [RolesController::class, 'readRoles']);
+        Route::middleware(["no-access-clients"], function() {
+            Route::get('read-roles', [RolesController::class, 'readRoles']);
 
-        Route::prefix("assignment", function() {
-            Route::post('create', [AssignmentRequirementsController::class, 'createAssignmentrequirements']);
-            Route::post('update', [AssignmentRequirementsController::class, 'updateAssignmentRequirements']);
+            Route::prefix("assignment", function() {
+                Route::post('create', [AssignmentRequirementsController::class, 'createAssignmentrequirements']);
+                Route::post('update', [AssignmentRequirementsController::class, 'updateAssignmentRequirements']);
 
-            Route::prefix("read", function() {
-                Route::get('select', [AssignmentRequirementsController::class, 'ReadAssignmentRequirementsSelect']);
-                Route::get('read_assigments', [AssignmentRequirementsController::class, 'readAssigmentsRequirements']);
+                Route::prefix("read", function() {
+                    Route::get('select', [AssignmentRequirementsController::class, 'ReadAssignmentRequirementsSelect']);
+                    Route::get('read_assigments', [AssignmentRequirementsController::class, 'readAssigmentsRequirements']);
+                });
+
+                Route::prefix("developers", function() {
+                    Route::post('create', [AssignmentRequirementsHasDevelopersController::class, 'createAssignmentRequirementsHasDevelopers']);
+                    Route::post('delete', [AssignmentRequirementsHasDevelopersController::class, 'deletesignmentRequirementsHasDevelopers']);
+                    Route::post('update', [AssignmentRequirementsHasDevelopersController::class, 'updatessignmentRequirementsHasDevelopers']);
+
+                    Route::prefix("read", function() {
+                        Route::get('bydevelopers/{iddevelopers}', [AssignmentRequirementsHasDevelopersController::class, 'readAssigmentDevelopers']);
+                        Route::get('assigment', [AssignmentRequirementsHasDevelopersController::class, 'readAssigmentHasDevelopers']);
+                        Route::get('tasks-assigned-status', [AssignmentRequirementsHasDevelopersController::class, 'tasksAssignedStatus']);
+                        Route::get('tasks-finished-status', [AssignmentRequirementsHasDevelopersController::class, 'tasksFinishedStatus']);
+                    });
+                });
             });
 
             Route::prefix("developers", function() {
-                Route::post('create', [AssignmentRequirementsHasDevelopersController::class, 'createAssignmentRequirementsHasDevelopers']);
-                Route::post('delete', [AssignmentRequirementsHasDevelopersController::class, 'deletesignmentRequirementsHasDevelopers']);
-                Route::post('update', [AssignmentRequirementsHasDevelopersController::class, 'updatessignmentRequirementsHasDevelopers']);
+                Route::post('create', [DevelopersController::class, 'createDevelopers']);
+                Route::post('update', [DevelopersController::class, 'updateDevelopers']);
 
                 Route::prefix("read", function() {
-                    Route::get('bydevelopers/{iddevelopers}', [AssignmentRequirementsHasDevelopersController::class, 'readAssigmentDevelopers']);
-                    Route::get('assigment', [AssignmentRequirementsHasDevelopersController::class, 'readAssigmentHasDevelopers']);
-                    Route::get('tasks-assigned-status', [AssignmentRequirementsHasDevelopersController::class, 'tasksAssignedStatus']);
-                    Route::get('tasks-finished-status', [AssignmentRequirementsHasDevelopersController::class, 'tasksFinishedStatus']);
+                    Route::get('/', [DevelopersController::class, 'readDevelopers']);
+                    Route::get('select', [DevelopersController::class, 'readDevelopersSelect']);
                 });
-            });
-        });
-
-        Route::prefix("developers", function() {
-            Route::post('create', [DevelopersController::class, 'createDevelopers']);
-            Route::post('update', [DevelopersController::class, 'updateDevelopers']);
-
-            Route::prefix("read", function() {
-                Route::get('/', [DevelopersController::class, 'readDevelopers']);
-                Route::get('select', [DevelopersController::class, 'readDevelopersSelect']);
             });
         });
     });
