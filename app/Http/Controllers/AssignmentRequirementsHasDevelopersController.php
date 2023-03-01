@@ -11,19 +11,19 @@ use Database\Class\AssignmentRequirementsHasDevelopers;
 class AssignmentRequirementsHasDevelopersController {
 
 	private AssignmentRequirementsHasDevelopersModel $assignmentRequirementsHasDevelopersModel;
-    private AssignmentRequirementsModel $assignmentRequirementsModel;
+	private AssignmentRequirementsModel $assignmentRequirementsModel;
 
 	public function __construct() {
 		$this->assignmentRequirementsHasDevelopersModel = new AssignmentRequirementsHasDevelopersModel();
-        $this->assignmentRequirementsModel = new AssignmentRequirementsModel();
+		$this->assignmentRequirementsModel = new AssignmentRequirementsModel();
 	}
 
 	public function createAssignmentRequirementsHasDevelopers() {
 		$assignmentRequirementsHasDevelopers = AssignmentRequirementsHasDevelopers::formFields();
 
-        $verify = $this->assignmentRequirementsHasDevelopersModel->verifyExistAssigmentsDevelopersDB(
-            $assignmentRequirementsHasDevelopers
-        );
+		$verify = $this->assignmentRequirementsHasDevelopersModel->verifyExistAssigmentsDevelopersDB(
+			$assignmentRequirementsHasDevelopers
+		);
 
 		if ($verify->cont > 0) {
 			return response->error("ya este desarrollador existe en esta asignación");
@@ -31,24 +31,24 @@ class AssignmentRequirementsHasDevelopersController {
 
 		$responseCreate = $this->assignmentRequirementsHasDevelopersModel->createAssigmentDevelopers(
 			$assignmentRequirementsHasDevelopers->setIdstates(6)
-                ->setAssignmentRequirementsHasDevelopersDate(Carbon::now()->format('Y-m-d'))
+			->setAssignmentRequirementsHasDevelopersDate(Carbon::now()->format('Y-m-d'))
 		);
 
 		if ($responseCreate->status === 'database-error') {
 			return response->error('Ha ocurrido un error al asignar el desarrolladores');
 		}
 
-        $responseUpdate = $this->assignmentRequirementsModel->updateRequirementStateDB(
-            (new AssignmentRequirements())
-                ->setIdstates(9)
-                ->setIdassignmentRequirements(
-                    (int) $assignmentRequirementsHasDevelopers->getIdassignmentRequirements()
-                )
-        );
+		$responseUpdate = $this->assignmentRequirementsModel->updateRequirementStateDB(
+			(new AssignmentRequirements())
+			->setIdstates(9)
+			->setIdassignmentRequirements(
+				(int) $assignmentRequirementsHasDevelopers->getIdassignmentRequirements()
+			)
+		);
 
-        if ($responseUpdate->status === 'database-error') {
-            return response->error('Ha ocurrido un error al asignar el desarrolladores [2]');
-        }
+		if ($responseUpdate->status === 'database-error') {
+			return response->error('Ha ocurrido un error al asignar el desarrolladores [2]');
+		}
 
 		return response->success('Desarrollador asignado correctamente');
 	}
@@ -92,11 +92,15 @@ class AssignmentRequirementsHasDevelopersController {
 		);
 	}
 
-	public function tasksAssignedStatus(){
-		return $this->assignmentRequirementsHasDevelopersModel->tasksAssignedStatusDB();
+	public function tasksAssignedStatus(string $iddevelopers){
+		return $this->assignmentRequirementsHasDevelopersModel->tasksAssignedStatusDB(
+			(new AssignmentRequirementsHasDevelopers())->setIddevelopers( (int) $iddevelopers)
+		);
 	}
 
-		public function tasksFinishedStatus(){
-		return $this->assignmentRequirementsHasDevelopersModel->tasksFinishedStatusDB();
+	public function tasksFinishedStatus(string $iddevelopers){
+		return $this->assignmentRequirementsHasDevelopersModel->tasksFinishedStatusDB(
+				(new AssignmentRequirementsHasDevelopers())->setIddevelopers( (int) $iddevelopers)
+		);
 	}
 }

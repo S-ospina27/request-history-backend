@@ -24,60 +24,68 @@ class AssignmentRequirementsHasDevelopersModel {
 
     public function readAssigmentHasDevelopersDB() {
         return DB::view("read_assigments_developers")
-            ->select()
-            ->getAll();
+        ->select()
+        ->getAll();
     }
 
     public function readAssigmentHasDevelopersByAssignmentRequirementsDB(
         AssignmentRequirementsHasDevelopers $assignmentRequirementsHasDevelopers
     ) {
         return DB::fetchClass(AssignmentRequirementsHasDevelopers::class)
-            ->view("read_assigments_developers")
-            ->select()
-            ->where(
-                DB::equalTo('idassignment_requirements'),
-                $assignmentRequirementsHasDevelopers->getIdassignmentRequirements()
-            )
-            ->getAll();
+        ->view("read_assigments_developers")
+        ->select()
+        ->where(
+            DB::equalTo('idassignment_requirements'),
+            $assignmentRequirementsHasDevelopers->getIdassignmentRequirements()
+        )
+        ->getAll();
     }
 
     public function verifyExistAssigmentsDevelopersDB(
         AssignmentRequirementsHasDevelopers $assignmentRequirementsHasDevelopers
     ) {
         return DB::table("assignment_requirements_has_developers")
-            ->select(DB::as(DB::count('*'), 'cont'))
-            ->where(
-                DB::equalTo('idassignment_requirements'),
-                $assignmentRequirementsHasDevelopers->getIdassignmentRequirements()
-            )
-            ->and(
-                DB::equalTo('iddevelopers'),
-                $assignmentRequirementsHasDevelopers->getIddevelopers()
-            )
-            ->get();
+        ->select(DB::as(DB::count('*'), 'cont'))
+        ->where(
+            DB::equalTo('idassignment_requirements'),
+            $assignmentRequirementsHasDevelopers->getIdassignmentRequirements()
+        )
+        ->and(
+            DB::equalTo('iddevelopers'),
+            $assignmentRequirementsHasDevelopers->getIddevelopers()
+        )
+        ->get();
     }
 
     public function readAssigmentDevelopersDB(
         AssignmentRequirementsHasDevelopers $assignmentRequirementsHasDevelopers
     ) {
         return DB::view("read_developers_table")
-            ->select()
-            ->where(DB::equalTo("iddevelopers"),$assignmentRequirementsHasDevelopers->getIddevelopers())
-            ->getAll();
+        ->select()
+        ->where(DB::equalTo("iddevelopers"),$assignmentRequirementsHasDevelopers->getIddevelopers())
+        ->getAll();
     }
 
-    public function tasksAssignedStatusDB() {
+    public function tasksAssignedStatusDB(   AssignmentRequirementsHasDevelopers $assignmentRequirementsHasDevelopers) {
         return DB::view("assignment_requirements_has_developers")
-            ->select(DB::as(DB::count('*'), 'cont'))
-            ->where(DB::equalTo("idstates"),6)
-            ->get();
+        ->select(DB::as(DB::count('*'), 'cont'))
+        ->where(DB::equalTo("idstates"),6)
+        ->and(
+            DB::equalTo('iddevelopers'),
+            $assignmentRequirementsHasDevelopers->getIddevelopers()
+        )
+        ->get();
     }
 
-    public function tasksFinishedStatusDB() {
+    public function tasksFinishedStatusDB(AssignmentRequirementsHasDevelopers $assignmentRequirementsHasDevelopers) {
         return DB::view("assignment_requirements_has_developers")
-            ->select(DB::as(DB::count('*'), 'cont'))
-            ->where(DB::equalTo("idstates"),7)
-            ->get();
+        ->select(DB::as(DB::count('*'), 'cont'))
+        ->where(DB::equalTo("idstates"),7)
+        ->and(
+            DB::equalTo('iddevelopers'),
+            $assignmentRequirementsHasDevelopers->getIddevelopers()
+        )
+        ->get();
     }
 
     public function updatessignmentRequirementsHasDevelopersDB(
@@ -92,10 +100,10 @@ class AssignmentRequirementsHasDevelopersModel {
 
     public function deletesignmentRequirementsHasDevelopersDB(array $idassignment_requirements_has_developers) {
         return DB::table("assignment_requirements_has_developers")
-            ->delete()
-            ->where("idassignment_requirements_has_developers")
-            ->in(...$idassignment_requirements_has_developers)
-            ->execute();
+        ->delete()
+        ->where("idassignment_requirements_has_developers")
+        ->in(...$idassignment_requirements_has_developers)
+        ->execute();
     }
 
 }
