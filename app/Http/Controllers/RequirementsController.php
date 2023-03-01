@@ -26,8 +26,8 @@ class RequirementsController {
 		if ($verifyRequirementsExistence->cont === 0) {
 			$responseCreate =$this->requirementsModel->createRequirementsDB(
 				Requirements::formFields()
-                ->setRequirementsDate(Carbon::now()->format('Y-m-d'))
-                ->setIdstates(1)
+                    ->setRequirementsDate(Carbon::now()->format('Y-m-d'))
+                    ->setIdstates(1)
             );
 
 			if ($responseCreate->status === 'database-error') {
@@ -37,12 +37,11 @@ class RequirementsController {
             return response->success('Requerimiento creado correctamente');
         }
 
-        return response->info("tienees requerimientos pendientes no puedes agregar mas");
+        return response->info("tienes requerimientos pendientes, no puedes agregar mas");
     }
 
     public function updateRequirements() {
-        $responseUpdate= $this->requirementsModel->updateRequirementsDB(Requirements::formFields());
-
+        $responseUpdate = $this->requirementsModel->updateRequirementsDB(Requirements::formFields());
         if ($responseUpdate->status === 'database-error') {
             return response->error('Ha ocurrido un error al actualizar el requerimiento');
         }
