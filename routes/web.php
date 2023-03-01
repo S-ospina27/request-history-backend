@@ -22,26 +22,26 @@ Route::prefix('api', function() {
         Route::post('login', [LoginController::class, 'auth']);
     });
 
+    Route::prefix("companies", function() {
+        Route::post('create', [CompaniesController::class, 'createCompanies']);
+        Route::post('update', [CompaniesController::class, 'updateCompanies']);
+        Route::get('read-companies-selector', [CompaniesController::class, 'readCompaniesSelector']);
+
+        Route::prefix("requirements", function() {
+            Route::post('create', [RequirementsController::class, 'createRequirements']);
+            Route::post('update', [RequirementsController::class, 'updateRequirements']);
+            Route::post('requirementsByclients', [RequirementsController::class, 'readRequirementsByClients']);
+            Route::get('pending', [RequirementsController::class, 'pendingRequirements']);
+            Route::get('accepted', [RequirementsController::class, 'acceptedRequirements']);
+            Route::get('finished', [RequirementsController::class, 'finishedRequirements']);
+            Route::get('requirementsByadmin', [RequirementsController::class, 'readRequirementsAdmin']);
+            Route::get('requirements-selector/{idcompanies}', [RequirementsController::class, 'readRequirementsSelector']);
+            Route::get('stateselector', [RequirementsController::class, 'stateSelector']);
+        });
+    });
+
     Route::middleware(["jwt-authorize", "all-access"], function() {
         Route::get('read-roles', [RolesController::class, 'readRoles']);
-
-        Route::prefix("companies", function() {
-            Route::post('create', [CompaniesController::class, 'createCompanies']);
-            Route::post('update', [CompaniesController::class, 'updateCompanies']);
-            Route::get('read-companies-selector', [CompaniesController::class, 'readCompaniesSelector']);
-
-            Route::prefix("requirements", function() {
-                Route::post('create', [RequirementsController::class, 'createRequirements']);
-                Route::post('update', [RequirementsController::class, 'updateRequirements']);
-                Route::post('requirementsByclients', [RequirementsController::class, 'readRequirementsByClients']);
-                Route::get('pending', [RequirementsController::class, 'pendingRequirements']);
-                Route::get('accepted', [RequirementsController::class, 'acceptedRequirements']);
-                Route::get('finished', [RequirementsController::class, 'finishedRequirements']);
-                Route::get('requirementsByadmin', [RequirementsController::class, 'readRequirementsAdmin']);
-                Route::get('requirements-selector/{idcompanies}', [RequirementsController::class, 'readRequirementsSelector']);
-                Route::get('stateselector', [RequirementsController::class, 'stateSelector']);
-            });
-        });
 
         Route::prefix("assignment", function() {
             Route::post('create', [AssignmentRequirementsController::class, 'createAssignmentrequirements']);
