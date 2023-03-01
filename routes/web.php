@@ -17,10 +17,8 @@ use LionRoute\Route;
  * ------------------------------------------------------------------------------
  **/
 
-Route::middleware(["jwt-not-authorize"], function() {
-    Route::prefix('auth', function() {
-        Route::post('login', [LoginController::class, 'auth']);
-    });
+Route::prefix('auth', function() {
+    Route::post('login', [LoginController::class, 'auth']);
 });
 
 Route::middleware(["jwt-authorize", "all-access"], function() {
