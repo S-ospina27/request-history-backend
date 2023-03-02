@@ -43,7 +43,7 @@ class CompaniesController {
 
         return response->info("Ingreso exitoso", [
             'idcompanies' => $idcompanies->getIdcompanies(),
-            'idroles' => $companies->getIdroles(),
+            'idroles' => $idcompanies->getIdroles(),
             'companies_nit' => $companies->getCompaniesNit()
         ]);
     }
