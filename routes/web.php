@@ -62,8 +62,8 @@ Route::prefix('api', function() {
                         Route::get('bydevelopers/{iddevelopers}', [AssignmentRequirementsHasDevelopersController::class, 'readAssigmentDevelopers']);
                         Route::get('assigment', [AssignmentRequirementsHasDevelopersController::class, 'readAssigmentHasDevelopers']);
 
-                        Route::get('tasks-assigned-status', [AssignmentRequirementsHasDevelopersController::class, 'tasksAssignedStatus/{iddevelopers}']);
-                        Route::get('tasks-finished-status', [AssignmentRequirementsHasDevelopersController::class, 'tasksFinishedStatus/{iddevelopers}']);
+                        Route::get('tasks-assigned-status/{iddevelopers}', [AssignmentRequirementsHasDevelopersController::class, 'tasksAssignedStatus']);
+                        Route::get('tasks-finished-status/{iddevelopers}', [AssignmentRequirementsHasDevelopersController::class, 'tasksFinishedStatus']);
                     });
                 });
             });
